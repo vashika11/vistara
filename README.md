@@ -39,10 +39,11 @@ The GUI will launch, allowing you to upload and stylize your image.
 
 
 **📂 File Structure**
-vistara.py         # Main application script
-README.md          # Project documentation
-LICENSE
-gitattributes
+- vistara.py         # Main application script
+- README.md          # Project documentation
+- LICENSE
+- gitattributes
+- requirements
 
 
 **🧠 How It Works**
