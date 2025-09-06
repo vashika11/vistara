@@ -1,6 +1,5 @@
 import cv2 #importing opencv to process the image
 import easygui #to access and open the filebox
-import numpy as np #to store image
 import imageio #to read image stored at particular path
 
 import sys
@@ -12,17 +11,18 @@ from tkinter import *
 from PIL import ImageTk, Image
 
 top=tk.Tk()
-top.geometry('400x400')
-top.title('Cartoonify Your Image !')
+top.geometry('600x600')
+top.title('Vistara – Stylize your image perfect')
+
 top.configure(background='white')
-label=Label(top,background='#CDCDCD', font=('calibri',20,'bold'))
+label=Label(top,background="#C4C7C7", font=('Arial',50,'bold'))
 
 def upload():
     ImagePath=easygui.fileopenbox()
-    cartoonify(ImagePath)
+    vistara(ImagePath)
 
 
-def cartoonify(ImagePath):
+def vistara(ImagePath):
     #to read the image
     originalmage = cv2.imread(ImagePath)
     originalmage = cv2.cvtColor(originalmage, cv2.COLOR_BGR2RGB)
@@ -30,7 +30,7 @@ def cartoonify(ImagePath):
 
     # confirm that image is chosen
     if originalmage is None:
-        print("Can not find any image. Choose appropriate file")
+        print("Error : Can not find any image. Choose appropriate file")
         sys.exit()
 
     ReSized1 = cv2.resize(originalmage, (960, 540))
@@ -65,9 +65,9 @@ def cartoonify(ImagePath):
 
 
     #masking edged image with our "BEAUTIFY" image
-    cartoonImage = cv2.bitwise_and(colorImage, colorImage, mask=getEdge)
+    vImage = cv2.bitwise_and(colorImage, colorImage, mask=getEdge)
 
-    ReSized6 = cv2.resize(cartoonImage, (960, 540))
+    ReSized6 = cv2.resize(vImage, (960, 540))
     #plt.imshow(ReSized6, cmap='gray')
 
     # Plotting the whole transition
@@ -78,8 +78,8 @@ def cartoonify(ImagePath):
         ax.imshow(images[i], cmap='gray')
 
     save1=Button(top,text="Save cartoon image",command=lambda: save(ReSized6, ImagePath),padx=30,pady=5)
-    save1.configure(background='#364156', foreground='white',font=('calibri',10,'bold'))
-    save1.pack(side=TOP,pady=50)
+    save1.configure(background="#94B7F8", foreground='white',font=('calibri',20,'bold'))
+    save1.pack(side=TOP,pady=60)
     
     plt.show()
     
@@ -94,9 +94,9 @@ def save(ReSized6, ImagePath):
     I= "Image saved by name " + newName +" at "+ path
     tk.messagebox.showinfo(title=None, message=I)
 
-upload=Button(top,text="Cartoonify an Image",command=upload,padx=10,pady=5)
-upload.configure(background='#364156', foreground='white',font=('calibri',10,'bold'))
-upload.pack(side=TOP,pady=50)
+upload=Button(top,text="Stylize your image",command=upload,padx=20,pady=15)
+upload.configure(background="#1C1D1B", foreground='white',font=('calibri',20,'bold'))
+upload.pack(side=TOP,pady=60)
 
 top.mainloop()
 
